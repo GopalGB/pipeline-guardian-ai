@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+test-results/
+coverage/
+*.tsbuildinfo
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+!.env.example

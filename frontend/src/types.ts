@@ -1,0 +1,1 @@
+export type Incident = { id: number; state: string; evidence: Record<string, unknown>; retrieved_runbooks?: Array<Record<string, unknown>>; analysis?: Record<string, unknown>; decision?: Record<string, unknown>; action?: Record<string, unknown>; audit?: Array<Record<string, unknown>> };
