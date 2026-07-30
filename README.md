@@ -30,6 +30,21 @@ npx playwright install chromium
 npm run e2e
 ```
 
+## Run the local demo
+
+Start the deterministic backend and frontend in separate terminals:
+
+```bash
+# terminal 1, from the repository root
+PYTHONPATH=backend .venv/bin/uvicorn app.demo:app --host 127.0.0.1 --port 8000
+
+# terminal 2
+cd frontend
+npm run dev -- --host 127.0.0.1 --port 5173
+```
+
+Open <http://127.0.0.1:5173>, then choose **Poll source**. The Vite dev server proxies `/api` to the local FastAPI server.
+
 ## Runtime configuration
 
 Set runtime values in your local shell or an ignored `.env` file. Never commit credentials. The v0.1 runtime accepts a loopback SQLite database and loopback Airflow URL. Claude analysis requires the provider key and exact model identifier; missing or invalid values fail closed as `analysis_failed`. No provider credentials are needed for the test suite.

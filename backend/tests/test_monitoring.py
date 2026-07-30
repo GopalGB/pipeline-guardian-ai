@@ -32,3 +32,10 @@ def test_airflow_normalization_is_read_only_and_contract_compatible():
     assert adapter.poll()[0].state is TaskState.FAILED
     assert adapter.mutation_calls == 0
 
+
+def test_fixture_adapter_accepts_recorded_airflow_shape():
+    fixture = Path(__file__).parent / "fixtures" / "airflow_failed_run.json"
+    task = FixtureAdapter(fixture).poll()[0]
+    assert task.source == "fixture"
+    assert task.run_id == "run-1"
+    assert task.state is TaskState.FAILED

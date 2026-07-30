@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from app.adapters.airflow import normalize_airflow_response
 from app.domain import PipelineTask, TaskState
 
 
@@ -14,10 +15,11 @@ class FixtureAdapter:
         if self._recovered:
             return [PipelineTask(source="fixture", run_id="run-1", task_id="extract", state=TaskState.SUCCESS)]
         data = json.loads(self.fixture_path.read_text())
+        if "tasks" in data:
+            return [task.model_copy(update={"source": "fixture"}) for task in normalize_airflow_response(data)]
         return [PipelineTask.model_validate(data)]
 
     def retry_failed_task(self, task: PipelineTask) -> bool:
         self.retry_calls += 1
         self._recovered = True
         return True
-
