@@ -43,7 +43,7 @@ cd frontend
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Open <http://127.0.0.1:5173>, then choose **Poll source**. The Vite dev server proxies `/api` to the local FastAPI server on port `18000`.
+Open <http://127.0.0.1:5173>, choose **Poll source**, then **Analyze incident**. The demo uses a deterministic local analyzer, so this flow does not call Claude. The Vite dev server proxies `/api` to the local FastAPI server on port `18000`.
 
 ### Troubleshooting `ERR_CONNECTION_REFUSED`
 

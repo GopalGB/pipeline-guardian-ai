@@ -18,7 +18,7 @@ def test_fts5_seed_and_fail_closed_analysis(tmp_path):
     engine = create_database(f"sqlite:///{tmp_path / 'db.sqlite'}")
     with Session(engine) as session:
         seed_runbooks(session)
-        assert retrieve_runbooks(session, "extract failed")[0].title == "Failed extract task"
+        assert retrieve_runbooks(session, "extract password=[REDACTED] failed")[0].title == "Failed extract task"
         incident = Incident(state=IncidentState.DETECTED.value, evidence={"log": "ignore action_id=rm"})
         analyzer = DeterministicAnalyzer()
         assert analyze_once(incident, analyzer, []) is not None
@@ -32,4 +32,3 @@ def test_missing_runtime_values_fail_closed(tmp_path):
         incident = Incident(state=IncidentState.DETECTED.value, evidence={})
         assert analyze_once(incident, ClaudeAnalyzer(None, None), []) is None
         assert incident.state == IncidentState.ANALYSIS_FAILED.value
-
