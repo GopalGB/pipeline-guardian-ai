@@ -7,7 +7,7 @@ This repository is safe by default: deterministic fixtures power local tests, li
 ## Requirements
 
 - Python 3.11+
-- Node.js 20+
+- Node.js 24+
 - npm
 
 ## Backend setup and tests
