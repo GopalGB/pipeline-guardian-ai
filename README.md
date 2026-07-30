@@ -36,18 +36,18 @@ Start the deterministic backend and frontend in separate terminals:
 
 ```bash
 # terminal 1, from the repository root
-PYTHONPATH=backend .venv/bin/uvicorn app.demo:app --host 127.0.0.1 --port 8000
+PYTHONPATH=backend .venv/bin/uvicorn app.demo:app --host 127.0.0.1 --port 18000
 
 # terminal 2
 cd frontend
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Open <http://127.0.0.1:5173>, then choose **Poll source**. The Vite dev server proxies `/api` to the local FastAPI server.
+Open <http://127.0.0.1:5173>, then choose **Poll source**. The Vite dev server proxies `/api` to the local FastAPI server on port `18000`.
 
 ### Troubleshooting `ERR_CONNECTION_REFUSED`
 
-`127.0.0.1` is the computer running the browser. Both terminals must remain open on that same computer. If the page says it refused the connection, restart the frontend command and confirm it prints `Local: http://127.0.0.1:5173/`; then refresh the page. If the page loads but polling fails, restart the backend command and confirm `http://127.0.0.1:8000/docs` opens.
+`127.0.0.1` is the computer running the browser. Both terminals must remain open on that same computer. If the page says it refused the connection, restart the frontend command and confirm it prints `Local: http://127.0.0.1:5173/`; then refresh the page. If the page loads but polling fails, restart the backend command and confirm `http://127.0.0.1:18000/docs` opens. Port `8000` is intentionally avoided because it is commonly used by other local services.
 
 ## Runtime configuration
 
